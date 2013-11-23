@@ -25,3 +25,4 @@ cover_db/
 MYMETA.*
 
 /ChartJS-Generator-*
+.DS_Store
