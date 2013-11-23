@@ -259,12 +259,12 @@ sub up {
     if ($self->type =~ /^Line|Bar|Radar$/){
         $label = shift or die "Incremental target is not specified";
         $cnt = shift || 1;
-        die "Argument Incremental count is not numeric" if $cnt !~ /^\d+$/;
+        die "Argument Incremental count is not numeric" if ($cnt ^ $cnt) ne '0'; # not numeric
     }
     else{
         $label = "value"; # label for PolarArea, Pie, Doughnut
         $cnt = shift || 1;
-        die "Chart type `@{[$self->type]}` requires only numeric argument for increment" if $cnt !~ /^\d+$/;
+        die "Chart type `@{[$self->type]}` requires only numeric argument for increment" if ($cnt ^ $cnt) ne '0';
     }
     $self->{data}{$label} += $cnt;
 }
@@ -274,12 +274,12 @@ sub down {
     if ($self->type =~ /^Line|Bar|Radar$/){
         $label = shift or die "Decremental target is not specified";
         $cnt = shift || 1;
-        die "Argument Incremental count is not numeric" if $cnt !~ /^\d+$/;
+        die "Argument Incremental count is not numeric" if ($cnt ^ $cnt) ne '0'; # not numeric
     }
     else{
         $label = "value"; # label for PolarArea, Pie, Doughnut
         $cnt = shift || 1;
-        die "Chart type `@{[$self->type]}` requires only numeric argument for decrement" if $cnt !~ /^\d+$/;
+        die "Chart type `@{[$self->type]}` requires only numeric argument for decrement" if ($cnt ^ $cnt) ne '0';
     }
     $self->{data}{$label} -= $cnt;
 }
