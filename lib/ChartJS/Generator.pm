@@ -162,13 +162,13 @@ sub hash2js {
     while (my ($key, $val) = each %$hash){
         my $ref = ref $val;
         if (!$ref){
-            $js_str .= qq<@{[escape_json($key)]}:@{[$val =~ /true|false|null/ ? $val : quote_str(escape_json($val)) ]},>;
+            $js_str .= qq<$key:@{[$val =~ /true|false|null/ ? $val : quote_str(escape_json($val)) ]},>;
         }
         elsif($ref eq 'HASH'){
-            $js_str .= qq|@{[escape_json($key)]}:@{[hash2js($val)]},|;
+            $js_str .= qq|$key:@{[hash2js($val)]},|;
         }
         elsif($ref eq 'ARRAY'){
-            $js_str .= qq|@{[escape_json($key)]}:@{[array2js($val)]},|;
+            $js_str .= qq|$key:@{[array2js($val)]},|;
         }
         else{
             die "Object type `$ref` is not supported for method jsonize";
