@@ -144,6 +144,13 @@ sub escape_json {
     $_[0] =~ s/(['"\\])/\\$1/g if $_[0];
     return $_[0];
 }
+
+sub quote_str {
+    my $thingy = shift;
+    return !defined $thingy           ? "null"  # undef
+         : ($thingy ^ $thingy) eq '0' ? $thingy # numeric
+         : '"' . $thingy . '"';                 # string
+}
 sub jsonize {
     my $pl_data = shift;
     return ref $pl_data eq 'HASH'  ? hash2js($pl_data) : array2js($pl_data);
@@ -155,13 +162,13 @@ sub hash2js {
     while (my ($key, $val) = each %$hash){
         my $ref = ref $val;
         if (!$ref){
-            $js_str .= qq<"@{[escape_json($key)]}":@{[$val =~ /true|false|null/ ? $val : '"' . escape_json($val) . '"']},>;
+            $js_str .= qq<@{[escape_json($key)]}:@{[$val =~ /true|false|null/ ? $val : quote_str(escape_json($val)) ]},>;
         }
         elsif($ref eq 'HASH'){
-            $js_str .= qq|"@{[escape_json($key)]}":@{[hash2js($val)]},|;
+            $js_str .= qq|@{[escape_json($key)]}:@{[hash2js($val)]},|;
         }
         elsif($ref eq 'ARRAY'){
-            $js_str .= qq|"@{[escape_json($key)]}":@{[array2js($val)]},|;
+            $js_str .= qq|@{[escape_json($key)]}:@{[array2js($val)]},|;
         }
         else{
             die "Object type `$ref` is not supported for method jsonize";
@@ -177,7 +184,7 @@ sub array2js {
     for my $val (@$array){
         my $ref = ref $val;
         if (!$ref){
-            $js_str .= qq<@{[$val =~ /true|false|null/ ? $val : '"' . escape_json($val) . '"']},>;
+            $js_str .= qq<@{[$val =~ /true|false|null/ ? $val : quote_str(escape_json($val)) ]},>;
         }
         elsif($ref eq 'HASH'){
             $js_str .= qq|@{[hash2js($val)]},|;
