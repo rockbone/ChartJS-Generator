@@ -247,29 +247,35 @@ sub point_stroke_color {$_[0]->{point_stroke_color} = $_[1] || $_[0]->{point_str
 #  Require label as first argument when chart type is Line, Bar, Radar.
 #  In other type ignore label argumnet.
 sub up {
-    my ($self, $label) = @_;
+    my $self = shift;
+    my ($label, $cnt);
     if ($self->type =~ /^Line|Bar|Radar$/){
-        die "Decrement target is not specified" if !$label;
+        $label = shift or die "Incremental target is not specified";
+        $cnt = shift || 1;
+        die "Argument Incremental count is not numeric" if $cnt !~ /^\d+$/;
     }
     else{
-        warn "Ignore label argument as chart type is `@{[$self->type]}`" if $label;
         $label = "value"; # label for PolarArea, Pie, Doughnut
+        $cnt = shift || 1;
+        die "Chart type `@{[$self->type]}` requires only numeric argument for increment" if $cnt !~ /^\d+$/;
     }
-    $self->{data}{$label}++;
+    $self->{data}{$label} += $cnt;
 }
 sub down {
-    my ($self, $label) = @_;
+    my $self = shift;
+    my ($label, $cnt);
     if ($self->type =~ /^Line|Bar|Radar$/){
-        die "Decrement target is not specified" if !$label;
+        $label = shift or die "Decremental target is not specified";
+        $cnt = shift || 1;
+        die "Argument Incremental count is not numeric" if $cnt !~ /^\d+$/;
     }
     else{
-        warn "Ignore label argument as chart type is `@{[$self->type]}`" if $label;
         $label = "value"; # label for PolarArea, Pie, Doughnut
+        $cnt = shift || 1;
+        die "Chart type `@{[$self->type]}` requires only numeric argument for decrement" if $cnt !~ /^\d+$/;
     }
-    $self->{data}{$label}--;
+    $self->{data}{$label} -= $cnt;
 }
-
-
 
 1;
 __END__
