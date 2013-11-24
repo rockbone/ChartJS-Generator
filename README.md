@@ -49,20 +49,19 @@ Maybe it runs every where.
     Create a new chart element.
     $NAME          Name of the chart element. Must be unique.
     $COLOR         yellow, blue, green, pink, red
-                   You can spcify color as hash reference below.
 
-                   # Line Bar Radar
-                   {
-                       fill_color   => 'rgba(0,102,255,0.5)',
-                       stroke_color => '#0033ff',
-                       point_color  => '#0000ff',
-                       point_stroke_color => '#fff',
-                   }
+#####create_element ($c->create_element($NAME => %COLOR))
+
+    You can also spcify color as hash below.
+
+    %COLOR         # Line Bar Radar
+                   fill_color   => 'rgba(0,102,255,0.5)',
+                   stroke_color => '#0033ff',
+                   point_color  => '#0000ff',
+                   point_stroke_color => '#fff',
 
                    # PolarArea Pie Doughnut
-                   {
-                       color => 'rgba(255,0,0,0.5)'
-                   }
+                   color => 'rgba(255,0,0,0.5)'
 
 #####up ($elm->up($LABEL => $COUNT) Line, Bar, Radar
 
