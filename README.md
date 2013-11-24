@@ -15,7 +15,7 @@ ChartJS::Generator - generate HTML chart with Chart.js
     );
 
     # create each chart element
-    my $apple => $c->create_element(apple => 'red'); # (name => color)
+    my $apple = $c->create_element(apple => 'red'); # (name => color)
 
     # chart of sales of the yer
     my @label = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
