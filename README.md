@@ -19,6 +19,7 @@ ChartJS::Generator - generate HTML chart with Chart.js
 
     # chart of sales of the yer
     my @label = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+    $c->sort_labels_as_number(1);
     my @data  = (1, 3, 2, 9, 3, 8, 4, 2, 5, 4, 1, 7);
     for my $i (0..$#label){
         $apple->up($label[$i] => $data[$i]);
@@ -62,6 +63,19 @@ Maybe it runs every where.
 
                    # PolarArea Pie Doughnut
                    color => 'rgba(255,0,0,0.5)'
+
+#####labels ($c->labels(@LABELS))
+
+    @LABELS        Specify the labels. Any other label in `up` or `down` method ignored.
+                   Labels are sorted in the order of Array.
+
+#####sort_labels_as_number ($c->sort_labels_as_number($BOOL))
+
+    $BOOL          Flag that treat as number when sort labels.
+
+#####reverse_labels ($c->reverse_labels($BOOL))
+
+    $BOOL          Flag that reverse labels or not.
 
 #####up ($elm->up($LABEL => $COUNT) Line, Bar, Radar
 

@@ -116,14 +116,24 @@ sub options {
     $self->{options} = ref $_[0] eq 'HASH' ? $_[0] : {@_} if @_;
     return $self->{options} || {};
 }
+sub sort_labels_as_number {$_[0]->{sort_labels_as_number} = $_[1] || $_[0]->{sort_labels_as_number}}
+sub reverse_labels        {$_[0]->{reverse_labels} = $_[1] || $_[0]->{reverse_labels}}
 sub labels {
-    my ($self) = @_;
-    my %label;
-    for my $elm (@{$self->{elements}}){
-        $label{$_} = 1 for $elm->labels;
+    my $self = shift;
+    $self->{labels} = \@_ if @_;
+    my @labels;
+    if ($self->{labels}){
+        @labels = @{$self->{labels}};
     }
-    my @label_sorted = sort keys %label;
-    return wantarray ? @label_sorted : \@label_sorted;
+    else{
+        my %label;
+        for my $elm (@{$self->{elements}}){
+            $label{$_} = 1 for $elm->labels;
+        }
+        @labels = $self->sort_labels_as_number ? sort {$a <=> $b} keys %label : sort keys %label;
+    }
+    @labels = reverse @labels if $self->reverse_labels;
+    return wantarray ? @labels: \@labels;
 }
 sub element {
     my ($self, $name) = @_;

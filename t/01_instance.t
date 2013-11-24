@@ -31,6 +31,8 @@ for my $type (@type){
     can_ok($c, 'element');
     can_ok($c, 'spawn');
     can_ok($c, 'template');
+    can_ok($c, 'sort_labels_as_number');
+    can_ok($c, 'reverse_labels');
     can_ok($c, 'button_as_html');
     can_ok($c, 'data_as_json');
     can_ok($c, 'options_as_json');
