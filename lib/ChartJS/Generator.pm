@@ -113,7 +113,7 @@ sub width   {$_[0]->{width}  = $_[1] || $_[0]->{width}  || $CANVAS_WIDTH}
 sub height  {$_[0]->{height} = $_[1] || $_[0]->{height} || $CANVAS_HEIGHT}
 sub options {
     my $self = shift;
-    $self->{options} = ref $_[0] eq 'HASH' ? $_[0] : {\@_} if @_;
+    $self->{options} = ref $_[0] eq 'HASH' ? $_[0] : {@_} if @_;
     return $self->{options} || {};
 }
 sub labels {
@@ -238,6 +238,8 @@ TMP
 package ChartJS::Generator::Element;
 use strict;
 use warnings;
+
+our $VERSION = $ChartJS::Generator::VERSION;
 
 # Accessor
 sub name         {$_[0]->{name}}
