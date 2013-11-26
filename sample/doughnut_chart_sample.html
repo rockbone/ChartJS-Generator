@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mobile OS Share</title>
+<script src="http://cdn.rockbone.info/js/misc/Chart.js"></script>
+</head>
+<body>
+Mobile OS Share
+<div>
+ <canvas id="chart" width="1200" height="800"></canvas>
+</div>
+<div>
+<button style="background-color:rgba(102,153,255,1);" disabled>iOS</button><button style="background-color:rgba(255,102,153,1);" disabled>Android</button><button style="background-color:rgba(255,204,51,1);" disabled>WindowsPhone</button><button style="background-color:rgba(0,204,102,1);" disabled>FireFox</button><button style="background-color:#E0E4CC;" disabled>Tizen</button>
+</div>
+<script>
+var ctx = document.getElementById("chart").getContext("2d");
+var data = [{color:"rgba(102,204,255,0.5)",value:39},{value:46,color:"rgba(255,153,153,0.5)"},{value:5,color:"rgba(255,255,51,0.5)"},{value:2,color:"rgba(0,255,102,0.5)"},{color:"#E0E4CC",value:1}];
+var option = {};
+new Chart(ctx).Doughnut(data, option);
+</script>
+</body>
+</html>
