@@ -40,7 +40,7 @@ sub new {
 
 sub create_element {
     my ($self, $name) = (shift, shift);
-    my $color = @_ == 1        ? $COLOR_TABLE{$_[0]}
+    my $color = @_ == 1        ?  ref $_[0] eq 'HASH' ? $_[0] : $COLOR_TABLE{$_[0]}
               : !@_ || @_ % 2  ? undef
               :                  {@_};
     die "Element's color theme is not specified" if !$color;
@@ -70,7 +70,7 @@ sub button_as_html {
     my ($self) = @_;
     my $buttons = "";
     for my $elm (@{$self->{elements}}){
-        $buttons .= qq|<button style="background-color:@{[ $elm->stroke_color ]};" disabled>@{[ $elm->name ]}</button>|;
+        $buttons .= qq(<button style="background-color:@{[ $elm->stroke_color || $elm->color ]};" disabled>@{[ $elm->name ]}</button>);
     }
     return $buttons;
 }
