@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Public utility charge  2013</title>
+<script src="http://cdn.rockbone.info/js/misc/Chart.js"></script>
+</head>
+<body>
+Public utility charge  2013
+<div>
+ <canvas id="chart" width="1200" height="800"></canvas>
+</div>
+<div>
+<button style="background-color:rgba(102,153,255,1);" disabled>water</button><button style="background-color:rgba(255,204,51,1);" disabled>gas</button><button style="background-color:#7D4F6D;" disabled>electricity</button><button style="background-color:rgba(0,204,102,1);" disabled>telephone</button>
+</div>
+<script>
+var ctx = document.getElementById("chart").getContext("2d");
+var data = [{color:"rgba(102,204,255,0.5)",value:120},{color:"rgba(255,255,51,0.5)",value:80},{color:"#7D4F6D",value:230},{value:430,color:"rgba(0,255,102,0.5)"}];
+var option = {};
+new Chart(ctx).PolarArea(data, option);
+</script>
+</body>
+</html>
