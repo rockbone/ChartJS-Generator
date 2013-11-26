@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Countries</title>
+<script src="http://cdn.rockbone.info/js/misc/Chart.js"></script>
+</head>
+<body>
+Countries
+<div>
+ <canvas id="chart" width="1200" height="800"></canvas>
+</div>
+<div>
+<button style="background-color:rgba(102,153,255,1);" disabled>Japan</button><button style="background-color:rgba(204,51,0,1);" disabled>USA</button><button style="background-color:rgba(255,204,51,1);" disabled>China</button><button style="background-color:rgba(255,102,153,1);" disabled>Australia</button><button style="background-color:#E0E4CC;" disabled>Greg</button>
+</div>
+<script>
+var ctx = document.getElementById("chart").getContext("2d");
+var data = [{value:20,color:"rgba(102,204,255,0.5)"},{color:"rgba(204,102,0,0.5)",value:20},{color:"rgba(255,255,51,0.5)",value:20},{value:20,color:"rgba(255,153,153,0.5)"},{value:20,color:"#E0E4CC"}];
+var option = {};
+new Chart(ctx).Pie(data, option);
+</script>
+</body>
+</html>
