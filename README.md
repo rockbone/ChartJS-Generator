@@ -1,3 +1,8 @@
+# NOTICE
+
+**! This module runs under the Chart.js version 1.x. !**  
+**! Version 2.x or higher is not supported.          !**
+
 # NAME
 
 ChartJS::Generator - generate HTML chart with Chart.js
